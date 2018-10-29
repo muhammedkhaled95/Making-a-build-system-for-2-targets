@@ -10,8 +10,37 @@
 #*****************************************************************************
 
 # Add your Source files to this variable
-SOURCES =
+ifeq ($(PLATFORM), MSP432)
+	SOURCES = main.c \
+	          memory.c \
+	          interrupts_msp432p401r_gcc.c \
+	          startup_msp432p401r_gcc.c \
+	          system_msp432p401r.c
 
-# Add your include paths to this variable
-INCLUDES = 
+	# Add your include paths to this variable	
+	INCLUDES = memory.h \
+		   platform.h \
+	   	   cmsis_gcc.h \
+	           core_cm4.h \
+	           core_cmFunc.h \
+	           core_cmInstr.h \
+	           msp_compatibility.h \
+	           core_cmSimd.h \
+	           msp432p401r.h \
+	           system_msp432p401r.h 
+endif
+
+ifeq ($(PLATFORM), HOST)
+	SOURCES = main.c \
+		  memory.c 
+
+
+	INCLUDES = memory.h\
+	   	   platform.h 
+
+endif
+
+
+
+
 
